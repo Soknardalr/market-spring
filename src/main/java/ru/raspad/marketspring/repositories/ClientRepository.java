@@ -15,9 +15,9 @@ public class ClientRepository {
     @PostConstruct
     public void init(){
         clients = new ArrayList<>(Arrays.asList(
-                new Client(1L, "gashgash"),
-                new Client(2L, "quincy"),
-                new Client(3L, "cursed")
+                new Client(1L, "gashgash", 100),
+                new Client(2L, "quincy", 100),
+                new Client(3L, "cursed", 100)
         ));
     }
 
@@ -30,7 +30,7 @@ public class ClientRepository {
     }
 
     public void addClient(Long id, String name){
-        clients.add(new Client(id, name));
+        clients.add(new Client(id, name, 0));
     }
 
     public void addClient(Client client) {

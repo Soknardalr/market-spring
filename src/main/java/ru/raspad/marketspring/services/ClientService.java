@@ -27,4 +27,9 @@ public class ClientService {
     public void addClient(Client client) {
         repository.addClient(client);
     }
+
+    public void changeScore(Long id, Integer delta) {
+        Client client = repository.findById(id);
+        client.setScore(client.getScore() + delta);
+    }
 }
