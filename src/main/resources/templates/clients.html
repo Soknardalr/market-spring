@@ -5,9 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-<h1>Student page</h1>
-<h3 th:text="${'ID: ' + product.id}"/>
-<h3 th:text="${'title: ' + product.title}"/>
-<h3 th:text="${'price: ' + product.cost}"/>
+<div th:each="c : ${clients}">
+    <span th:text="${'Name: ' + c.name}"/>
+    <a th:href="@{'/page?id=' + ${c.id}}"/>
+</div>
 </body>
 </html>

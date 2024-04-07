@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add client</title>
+</head>
+<body>
+<h1>Add client</h1>
+<form method="get" th:action="@{'/client/add'}">
+    <span>id</span>
+    <input name="id" type="number">
+    <span>name</span>
+    <input name="name" type="text">
+    <button type="submit">submit</button>
+</form>
+</body>
+</html>
