@@ -9,29 +9,29 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
     <script src="index.js"></script>
-    <title>Clients</title>
+    <title>Products</title>
 </head>
 <body>
 <div class="container" ng-controller="indexController">
-    <h3>Client list</h3>
+    <h3>Product list</h3>
     <table class="table table-hover" cellpadding="0" cellspacing="0">
         <tr>
             <td>ID</td>
-            <td>Client name</td>
-            <td>Score</td>
+            <td>Product title</td>
+            <td>Price</td>
             <td>Do it</td>
         </tr>
         <tbody>
-        <tr ng-repeat="s in clientList">
-            <td>{{s.id}}</td>
-            <td>{{s.name}}</td>
+        <tr ng-repeat="p in productList">
+            <td>{{p.id}}</td>
+            <td>{{p.title}}</td>
             <td>
-            <button class="btn btn-danger" ng-click="changeScore(s.id, -5)">-</button>
-            {{s.score}}
-            <button class="btn btn-primary" ng-click="changeScore(s.id, 5)">+</button>
+            <button class="btn btn-danger" ng-click="changePrice(p.id, -5)">-</button>
+            {{p.price}}
+            <button class="btn btn-primary" ng-click="changePrice(p.id, 5)">+</button>
             </td>
             <td>
-                <button class="btn btn-danger" ng-click="deleteClient(s.id)">Delete</button>
+                <button class="btn btn-danger" ng-click="deleteProduct(p.id)">Delete</button>
             </td>
         </tbody>
     </table>

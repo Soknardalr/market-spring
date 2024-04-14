@@ -1,34 +1,33 @@
 package ru.raspad.marketspring.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.raspad.marketspring.dto.Client;
-import ru.raspad.marketspring.services.ClientService;
+import ru.raspad.marketspring.dto.Product;
+import ru.raspad.marketspring.services.ProductService;
 
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 public class MainController {
-    private final ClientService service;
-    @GetMapping("/clients")
-    public List<Client> getAllStudents(Model model){
-        return service.getAllClients();
+    private final ProductService service;
+    @GetMapping("/products")
+    public List<Product> getAllStudents(Model model){
+        return service.getAllProducts();
     }
 
-    @GetMapping("/client/change_score")
+    @GetMapping("/product/change_price")
     public void changeScore(@RequestParam Long clientId,@RequestParam Integer delta){
-        service.changeScore(clientId, delta);
+        service.changePrice(clientId, delta);
     }
 
-    @PostMapping("/client/add")
-    public void postClient(@RequestBody Client client){
-        service.addClient(client);
+    @PostMapping("/product/add")
+    public void postClient(@RequestBody Product product){
+        service.addProduct(product);
     }
 
-    @GetMapping("/client/delete/{id}")
+    @GetMapping("/product/delete/{id}")
     public void delete(@PathVariable Long id){
         service.deleteById(id);
     }
