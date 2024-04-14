@@ -32,4 +32,8 @@ public class ClientService {
         Client client = repository.findById(id);
         client.setScore(client.getScore() + delta);
     }
+
+    public void deleteById(Long id) {
+        repository.deleteById(id);
+    }
 }

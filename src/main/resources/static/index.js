@@ -21,5 +21,12 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
         });
     };
 
+    $scope.deleteClient = function (clientId){
+        $http.get(contexPath+'/client/delete/'+clientId)
+            .then(function (response){
+            $scope.loadClients();
+        });
+    }
+
     $scope.loadClients();
 });

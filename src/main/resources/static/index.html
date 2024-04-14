@@ -19,6 +19,7 @@
             <td>ID</td>
             <td>Client name</td>
             <td>Score</td>
+            <td>Do it</td>
         </tr>
         <tbody>
         <tr ng-repeat="s in clientList">
@@ -28,6 +29,9 @@
             <button class="btn btn-danger" ng-click="changeScore(s.id, -5)">-</button>
             {{s.score}}
             <button class="btn btn-primary" ng-click="changeScore(s.id, 5)">+</button>
+            </td>
+            <td>
+                <button class="btn btn-danger" ng-click="deleteClient(s.id)">Delete</button>
             </td>
         </tbody>
     </table>

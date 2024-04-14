@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class Client {
     private Long id;
     private String name;
-    private  Integer score;
+    private Integer score;
 }

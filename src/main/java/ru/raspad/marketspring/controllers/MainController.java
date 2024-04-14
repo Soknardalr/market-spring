@@ -28,4 +28,8 @@ public class MainController {
         service.addClient(client);
     }
 
+    @GetMapping("/client/delete/{id}")
+    public void delete(@PathVariable Long id){
+        service.deleteById(id);
+    }
 }

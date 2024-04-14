@@ -36,4 +36,8 @@ public class ClientRepository {
     public void addClient(Client client) {
         clients.add(client);
     }
+
+    public void deleteById(Long id) {
+        clients.removeIf(c -> c.getId().equals(id));
+    }
 }
