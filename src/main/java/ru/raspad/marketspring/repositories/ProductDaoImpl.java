@@ -77,6 +77,12 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public void deleteById(Long id) {
-
+        try (Session session = utils.getSession()) {
+            session.beginTransaction();
+            session.createQuery("delete Product p where p.id = :id")
+                    .setParameter("id", id)
+                    .executeUpdate();
+            session.getTransaction().commit();
+        }
     }
 }

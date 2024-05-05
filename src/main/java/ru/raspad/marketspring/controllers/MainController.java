@@ -18,8 +18,8 @@ public class MainController {
     }
 
     @GetMapping("/product/change_price")
-    public void changeScore(@RequestParam Long clientId,@RequestParam Integer delta){
-        service.changePrice(clientId, delta);
+    public void changeScore(@RequestParam Long productId, @RequestParam Integer delta){
+        service.changePrice(productId, delta);
     }
 
     @PostMapping("/product/add")
