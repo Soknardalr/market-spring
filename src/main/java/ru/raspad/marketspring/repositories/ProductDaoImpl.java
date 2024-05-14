@@ -26,6 +26,17 @@ public class ProductDaoImpl implements ProductDao {
         }
 
     }
+    @Override
+    public List<Product> findAll() {
+        try (Session session = utils.getSession()) {
+            session.beginTransaction();
+            List<Product> products = session.createQuery("select p from Product p").getResultList();
+            session.getTransaction().commit();
+            return products;
+        }
+
+
+    }
 
     @Override
     public Product findByTitle(String title) {
@@ -37,18 +48,6 @@ public class ProductDaoImpl implements ProductDao {
             session.getTransaction().commit();
             return product;
         }
-    }
-
-    @Override
-    public List<Product> findAll() {
-        try (Session session = utils.getSession()) {
-            session.beginTransaction();
-            List<Product> products = session.createQuery("select p from Product p").getResultList();
-            session.getTransaction().commit();
-            return products;
-        }
-
-
     }
 
     @Override
