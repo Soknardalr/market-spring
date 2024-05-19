@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,6 +21,14 @@ public class Product {
     private String title;
     @Column( name = "price")
     private Integer price;
+
+    @ManyToMany
+    @JoinTable(
+            name = "customers_products",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn (name = "customer_id")
+    )
+    private List<Customer> customers;
 
 
 }

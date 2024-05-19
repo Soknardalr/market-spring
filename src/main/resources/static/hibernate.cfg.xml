@@ -14,5 +14,6 @@
         <property name="hibernate.hbm2ddl.auto">create-drop</property>
 
         <mapping class="ru.raspad.marketspring.dto.Product"/>
+        <mapping class="ru.raspad.marketspring.dto.Customer"/>
     </session-factory>
 </hibernate-configuration>

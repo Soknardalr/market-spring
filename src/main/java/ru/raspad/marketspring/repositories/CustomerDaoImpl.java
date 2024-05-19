@@ -1,6 +1,7 @@
 package ru.raspad.marketspring.repositories;
 
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.raspad.marketspring.SessionFactoryUtils;
 import ru.raspad.marketspring.dto.Customer;
@@ -11,7 +12,7 @@ import java.util.List;
 public class CustomerDaoImpl implements CustomerDao {
     private SessionFactoryUtils utils;
 
-    public CustomerDaoImpl(SessionFactoryUtils utils) {
+    public CustomerDaoImpl(@Autowired SessionFactoryUtils utils) {
         this.utils = utils;
     }
 
