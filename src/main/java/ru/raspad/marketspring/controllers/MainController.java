@@ -14,6 +14,7 @@ public class MainController {
     private final ProductService service;
     @GetMapping("/products")
     public List<Product> getAllStudents(Model model){
+        System.out.println("delete me");
         return service.getAllProducts();
     }
 

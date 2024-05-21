@@ -1,14 +1,14 @@
 package ru.raspad.marketspring.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.springframework.context.annotation.Lazy;
 
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "products")
@@ -22,7 +22,8 @@ public class Product {
     @Column( name = "price")
     private Integer price;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER) // todo: ???
+    @JsonIgnore
     @JoinTable(
             name = "customers_products",
             joinColumns = @JoinColumn(name = "product_id"),

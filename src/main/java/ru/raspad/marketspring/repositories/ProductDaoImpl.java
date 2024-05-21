@@ -32,6 +32,11 @@ public class ProductDaoImpl implements ProductDao {
             session.beginTransaction();
             List<Product> products = session.createQuery("select p from Product p").getResultList();
             session.getTransaction().commit();
+
+//            Product product = new Product();
+//            product.setTitle("tttt");
+//            products = List.of(product);
+
             return products;
         }
 
