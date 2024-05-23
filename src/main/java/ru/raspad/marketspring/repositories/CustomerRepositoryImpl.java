@@ -4,75 +4,68 @@ import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.raspad.marketspring.SessionFactoryUtils;
-import ru.raspad.marketspring.dto.Customer;
+import ru.raspad.marketspring.entity.CustomerDao;
 
 import java.util.List;
 
 @Repository
-public class CustomerDaoImpl implements CustomerDao {
+public class CustomerRepositoryImpl implements CustomerRepository {
     private SessionFactoryUtils utils;
-
-    public CustomerDaoImpl(@Autowired SessionFactoryUtils utils) {
+    public CustomerRepositoryImpl(@Autowired SessionFactoryUtils utils) {
         this.utils = utils;
     }
-
     @Override
-    public Customer findById(Long id) {
+    public CustomerDao findById(Long id) {
         try (Session session = utils.getSession()) {
             session.getTransaction();
-            Customer customer = session.get(Customer.class, id);
+            CustomerDao customerDao = session.get(CustomerDao.class, id);
             session.getTransaction().commit();
-            return customer;
+            return customerDao;
         }
     }
-
     @Override
-    public List<Customer> findAll() {
+    public List<CustomerDao> findAll() {
         try (Session session = utils.getSession()) {
             session.getTransaction();
-            List<Customer> customers = session.createQuery("select c from Customer c").getResultList();
+            List<CustomerDao> customerDaos = session.createQuery("select c from CustomerDao c").getResultList();
             session.getTransaction().commit();
-            return customers;
+            return customerDaos;
         }
     }
-
     @Override
-    public Customer findByName(String name) {
+    public CustomerDao findByName(String name) {
         try (Session session = utils.getSession()) {
             session.getTransaction();
-            Customer customer = session.createQuery("select c from Customer c where c.name =: name", Customer.class)
+            CustomerDao customerDao = session.createQuery("select c from CustomerDao c where c.name =: name", CustomerDao.class)
                     .setParameter("name", name)
                     .getSingleResult();
             session.getTransaction().commit();
-            return customer;
+            return customerDao;
         }
     }
-
     @Override
-    public void save(Customer customer) {
+    public void save(CustomerDao customerDao) {
         try (Session session = utils.getSession()) {
             session.getTransaction();
-            session.saveOrUpdate(customer);
+            session.saveOrUpdate(customerDao);
             session.getTransaction().commit();
         }
 
     }
-
     @Override
     public void update(Long id, String name) {
         try (Session session = utils.getSession()) {
             session.getTransaction();
-            Customer customer = session.get(Customer.class, id);
-            customer.setName(name);
+            CustomerDao customerDao = session.get(CustomerDao.class, id);
+            customerDao.setName(name);
             session.getTransaction().commit();
         }
     }
-
     @Override
     public void deleteById(Long id) {
         try (Session session = utils.getSession()) {
             session.getTransaction();
-            session.createQuery("delete  Customer c where c.id =: id")
+            session.createQuery("delete  CustomerDao c where c.id =: id")
                     .setParameter("id", id)
                     .executeUpdate();
             session.getTransaction().commit();

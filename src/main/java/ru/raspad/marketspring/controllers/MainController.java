@@ -1,9 +1,11 @@
 package ru.raspad.marketspring.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.raspad.marketspring.dto.Product;
+import ru.raspad.marketspring.dto.ProductDto;
+import ru.raspad.marketspring.entity.ProductDao;
 import ru.raspad.marketspring.services.ProductService;
 
 import java.util.List;
@@ -13,7 +15,7 @@ import java.util.List;
 public class MainController {
     private final ProductService service;
     @GetMapping("/products")
-    public List<Product> getAllStudents(Model model){
+    public List<ProductDto> getAllStudents(Model model){
         System.out.println("delete me");
         return service.getAllProducts();
     }
@@ -24,8 +26,8 @@ public class MainController {
     }
 
     @PostMapping("/product/add")
-    public void postClient(@RequestBody Product product){
-        service.addProduct(product);
+    public void postClient(@RequestBody ProductDto productDto){
+        service.addProduct(productDto);
     }
 
     @GetMapping("/product/delete/{id}")

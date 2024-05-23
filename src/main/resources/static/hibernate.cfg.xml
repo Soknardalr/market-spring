@@ -13,7 +13,7 @@
         <property name="current_session_context_class">thread</property>
         <property name="hibernate.hbm2ddl.auto">create-drop</property>
 
-        <mapping class="ru.raspad.marketspring.dto.Product"/>
-        <mapping class="ru.raspad.marketspring.dto.Customer"/>
+        <mapping class="ru.raspad.marketspring.entity.ProductDao"/>
+        <mapping class="ru.raspad.marketspring.entity.CustomerDao"/>
     </session-factory>
 </hibernate-configuration>
