@@ -15,11 +15,13 @@ import java.util.List;
 public class MainController {
     private final ProductService service;
     @GetMapping("/products")
-    public List<ProductDto> getAllStudents(Model model){
-        System.out.println("delete me");
+    public List<ProductDto> getAllStudents(){
         return service.getAllProducts();
     }
-
+    @GetMapping("/product/{id}")
+    public ProductDto getProduct(@PathVariable Long id){
+        return service.getProduct(id);
+    }
     @GetMapping("/product/change_price")
     public void changeScore(@RequestParam Long productId, @RequestParam Integer delta){
         service.changePrice(productId, delta);

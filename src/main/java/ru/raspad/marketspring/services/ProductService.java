@@ -17,7 +17,7 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     public ProductDto getProduct(Long id){
-        return ProductMapper.INSTANCE.toDto(productRepository.findById(id));
+        return ProductMapper.INSTANCE.toDto(productRepository.findById(id).orElseThrow());
     }
 
     public List<ProductDto> getAllProducts(){
@@ -33,7 +33,7 @@ public class ProductService {
     }
 
     public void changePrice(Long id, Integer delta) {
-        ProductDao productDao = productRepository.findById(id);
+        ProductDao productDao = productRepository.findById(id).orElseThrow();
         productDao.setPrice(productDao.getPrice() + delta);
         productRepository.save(productDao);
     }

@@ -14,7 +14,7 @@ public class SessionFactoryUtils {
     @PostConstruct //TODO: CLOSE CONNECTION
     public void init(){
         factory = new Configuration()
-                .configure("static/hibernate.cfg.xml")
+                .configure("old repository/hibernate.cfg.xml")
                 .buildSessionFactory();
     }
 

@@ -2,3 +2,15 @@ server:
   port: 8189
   servlet:
     context-path: /app
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/marketDB
+    username: adm
+    password: adm
+  jpa:
+    show-sql: true
+    hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      ddl-auto: validate
