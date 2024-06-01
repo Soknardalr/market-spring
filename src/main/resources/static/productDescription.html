@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Product</title>
 </head>
 <body>
 <div>
-    <span>Price</span>
+    <span th:text="${'Price ' + ${product.getPrice}}"/>
     <span>Title</span>
 </div>
 </body>

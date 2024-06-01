@@ -15,7 +15,19 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ProductService {
     private final ProductRepository productRepository;
+    public List<ProductDto> getProductsByPriceBetween(Integer min, Integer max){
+        return productRepository.getProductsByPriceBetween(min, max).stream().map(ProductMapper.INSTANCE::toDto).collect(Collectors.toList());
+    }
+    public List<ProductDto> getProductsMaxPrice(Integer maxPrice){
+        return productRepository.getProductDaosByPriceIsLessThan(maxPrice).stream().map(ProductMapper.INSTANCE::toDto).collect(Collectors.toList());
+    }
+    public List<ProductDto> getProductsMinPrice(Integer minPrice){
+        return productRepository.getProductDaosByPriceIsGreaterThan(minPrice).stream().map(ProductMapper.INSTANCE::toDto).collect(Collectors.toList());
+    }
 
+//    public ProductDto getProduct(Long id){
+//        return ProductMapper.INSTANCE.toDto(productRepository.findById(id).orElseThrow());
+//    }
     public ProductDto getProduct(Long id){
         return ProductMapper.INSTANCE.toDto(productRepository.findById(id).orElseThrow());
     }
