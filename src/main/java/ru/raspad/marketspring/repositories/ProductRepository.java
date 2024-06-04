@@ -8,8 +8,10 @@ import java.util.List;
 
 public interface ProductRepository extends JpaRepository<ProductDao, Long> {
     // change to Optional?
-    public List<ProductDao> getProductDaosByPriceIsLessThan(Integer max);
-    public List<ProductDao> getProductDaosByPriceIsGreaterThan(Integer min);
+    List<ProductDao> getProductDaosByPriceIsLessThan(Integer max);
+    List<ProductDao> getProductDaosByPriceIsGreaterThan(Integer min);
+
+    boolean existsProductDaoByTitle(String title);
     @Query("select p from ProductDao p where p.price > :min and p.price < :max")
-    public List<ProductDao> getProductsByPriceBetween(Integer min, Integer max);
+    List<ProductDao> getProductsByPriceBetween(Integer min, Integer max);
 }

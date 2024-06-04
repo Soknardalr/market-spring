@@ -4,6 +4,7 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
     $scope.loadProducts = function (){
         $http.get(contextPath+'/products')
             .then(function (response){
+                console.log(response.data)
                 $scope.productList = response.data;
             });
     };
@@ -17,7 +18,7 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
                 delta: delta
             }
         }).then(function (response){
-            $scope.loadProducts()
+            $scope.loadProducts();
         });
     };
 
@@ -26,6 +27,14 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
             .then(function (response){
             $scope.loadProducts();
         });
+    }
+
+    $scope.createProductJson = function (){
+        console.log($scope.newProductJson)
+        $http.post(contextPath +'/product/add', $scope.newProductJson)
+            .then(function (response){
+                $scope.loadProducts();
+            })
     }
 
     $scope.loadProducts();

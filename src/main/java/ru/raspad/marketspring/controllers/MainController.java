@@ -1,6 +1,7 @@
 package ru.raspad.marketspring.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.raspad.marketspring.dto.ProductDto;
 import ru.raspad.marketspring.services.ProductService;
@@ -42,7 +43,6 @@ public class MainController {
     public void changePrice(@RequestParam Long productId, @RequestParam Integer delta) {
         service.changePrice(productId, delta);
     }
-
     @PostMapping("/product/add")
     public void postProduct(@RequestBody ProductDto productDto) {
         service.addProduct(productDto);
