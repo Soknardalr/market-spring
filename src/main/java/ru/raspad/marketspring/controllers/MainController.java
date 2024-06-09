@@ -1,6 +1,7 @@
 package ru.raspad.marketspring.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.raspad.marketspring.dto.ProductDto;
@@ -9,47 +10,51 @@ import ru.raspad.marketspring.services.ProductService;
 import java.util.List;
 
 @RestController
+@RequestMapping("api/v1/products")
 @RequiredArgsConstructor
 public class MainController {
     private final ProductService service;
 
-    @GetMapping(value = "/products/filter", params = {"min_price", "max_price"})
-    public List<ProductDto> getProductsByPriceBetween(@RequestParam(name = "min_price") Integer min,
-                                                      @RequestParam(name = "max_price") Integer max) {
-        return service.getProductsByPriceBetween(min, max);
+    @GetMapping()
+    public Page<ProductDto> getAllProducts(@RequestParam(name = "p", defaultValue = "1") Integer page,
+                                           @RequestParam(name = "min_price", required = false) Integer minPrice,
+                                           @RequestParam(name = "max_price", required = false) Integer maxPrice,
+                                           @RequestParam(name = "title_part", required = false) String titlePart) {
+        if (page < 1) {
+            page = 1;
+        }
+        return service.find(page, minPrice, maxPrice, titlePart);
     }
 
-    @GetMapping(value = "/products/filter", params = "max_price")
-    public List<ProductDto> getProductsMaxPrice(@RequestParam(name = "max_price") Integer max) {
-        return service.getProductsMaxPrice(max);
-    }
-
-    @GetMapping(value = "/products/filter", params = "min_price")
-    public List<ProductDto> getProductsMinPrice(@RequestParam(name = "min_price") Integer minPrice) {
-        return service.getProductsMinPrice(minPrice);
-    }
-
-    @GetMapping("/products")
-    public List<ProductDto> getAllProducts() {
-        return service.getAllProducts();
-    }
-
-    @GetMapping("/product/{id}")
+    @GetMapping("/{id}")
     public ProductDto getProduct(@PathVariable Long id) {
         return service.getProduct(id);
     }
 
-    @GetMapping("/product/change_price")
+    // todo uncorrected work
+    @PutMapping()
+    public void updateProduct(@RequestBody ProductDto product) {
+        service.updateProduct(product);
+    }
+
+    @Deprecated(forRemoval = true)
+    @GetMapping("/change_price")
     public void changePrice(@RequestParam Long productId, @RequestParam Integer delta) {
         service.changePrice(productId, delta);
     }
-    @PostMapping("/product/add")
+
+    @PostMapping()
     public void postProduct(@RequestBody ProductDto productDto) {
         service.addProduct(productDto);
     }
 
-    @GetMapping("/product/delete/{id}")
-    public void deleteProduct(@PathVariable Long id) {
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable Long id) {
         service.deleteById(id);
+    }
+
+    @PatchMapping("/{id}/title")
+    public void patchTitle(@PathVariable Long id, @RequestBody ProductDto productDto){
+        service.updateTitle(id, productDto);
     }
 }

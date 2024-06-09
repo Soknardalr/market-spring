@@ -15,6 +15,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<AppError> catchEntityAlreadyExistsException(EntityAlreadyExistsException e){
         return new ResponseEntity<>(new AppError(HttpStatus.CONFLICT.value(), e.getMessage()), HttpStatus.CONFLICT);
     }
+    @ExceptionHandler
+    public ResponseEntity<AppError> catchValidateException(ValidateException e){
+        return new ResponseEntity<>(new AppError(HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+
+
 
 
 }

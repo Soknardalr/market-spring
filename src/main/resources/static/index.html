@@ -22,7 +22,7 @@
             <td>Do it</td>
         </tr>
         <tbody>
-        <tr ng-repeat="p in productList">
+        <tr ng-repeat="p in productList.content">
             <td>{{p.id}}</td>
             <td>{{p.title}}</td>
             <td>
@@ -44,6 +44,15 @@
         <input class="form-control" type="number" placeholder="Price" ng-model="newProductJson.price">
         <p></p>
         <button type="submit" class="btn btn-primary">Сохранить JSON продукта</button>
+        <p></p>
+    </form>
+    <h3>Filter</h3>
+    <form novalidate ng-submit="loadProductsWithFilter()">
+        <input class="form-control" id="min" type="number" placeholder="Min price">
+        <p></p>
+        <input class="form-control" id="max" type="number" placeholder="Max price">
+        <p></p>
+        <button type="submit" id="filterButton" class="btn btn-primary">Apply filter</button>
         <p></p>
     </form>
 </div>
