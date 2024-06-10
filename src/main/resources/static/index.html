@@ -19,7 +19,7 @@
             <td>ID</td>
             <td>Product title</td>
             <td>Price</td>
-            <td>Do it</td>
+            <td>Please buy</td>
         </tr>
         <tbody>
         <tr ng-repeat="p in productList.content">
@@ -32,6 +32,7 @@
             </td>
             <td>
                 <button class="btn btn-danger" ng-click="deleteProduct(p.id)">Delete</button>
+                <button class="btn btn-info" ng-click="addToCart(p.id)">Add to Cart</button>
             </td>
         </tbody>
     </table>

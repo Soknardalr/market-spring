@@ -1,5 +1,6 @@
 angular.module('app', []).controller('indexController', function ($scope, $http) {
     const contextPath = 'http://localhost:8189/app/api/v1/products';
+    const cartPath = 'http://localhost:8189/app/api/v1/cart';
 
     $scope.loadProducts = function (){
         $http.get(contextPath)
@@ -38,6 +39,11 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
             $scope.loadProducts();
         });
     }
+
+        $scope.addToCart = function (productId){
+        $http.post(cartPath +'/'+productId);
+    }
+
 
     $scope.createProductJson = function (){
         console.log($scope.newProductJson)
