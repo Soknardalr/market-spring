@@ -1,7 +1,12 @@
 server:
   port: 8189
+  http2:
+    enabled: true
   servlet:
     context-path: /app
+
+jwt:
+  cookie-token-key: '{"kty":"oct","k":"956PBFst1FguLr5irJD-aQ"}'
 
 spring:
   datasource:
@@ -13,3 +18,7 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: validate
+
+logging:
+  level:
+    org.springframework.security: trace

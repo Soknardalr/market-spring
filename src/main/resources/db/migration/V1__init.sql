@@ -54,3 +54,10 @@ create table users_products (
                              primary key (user_id, product_id)
 );
 insert into users_products (user_id, product_id) VALUES (1, 1), (1, 2), (2, 2), (2, 3);
+
+create table t_deactivated_token
+(
+    id           uuid primary key,
+    c_keep_until timestamp not null check ( c_keep_until > now() )
+);
+
