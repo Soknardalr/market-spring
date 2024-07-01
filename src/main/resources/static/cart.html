@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    <script src="cart.js"></script>
+    <title>Product Cart</title>
+</head>
+<body>
+<div class="container" ng-controller="cartController">
+    <h3>Cart</h3>
+    <p><a href="index.html">Go to Market</a></p>
+    <table class="table table-hover" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>Product title</td>
+            <td>Quantity</td>
+        </tr>
+        <tbody>
+        <tr ng-repeat="c in cartList.content">
+            <td>{{c.title}}</td>
+            <td>{{c.quantity}}</td>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>

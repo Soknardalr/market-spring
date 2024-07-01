@@ -8,10 +8,10 @@ import ru.raspad.marketspring.MarketSpringApplication;
 import ru.raspad.marketspring.repositories.Cart;
 
 @Service
+@RequiredArgsConstructor
 public class CartService {
-
-    Cart cart = ctx.getBean(Cart.class);
-    public void addToCart(Long id) {
-        cart.addToCart(id);
+    private final Cart cart;
+    public void addToCart(String title) {
+        cart.addToCart(title);
     }
 }

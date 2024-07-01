@@ -1,20 +1,27 @@
 package ru.raspad.marketspring.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import ru.raspad.marketspring.dto.ProductDto;
 import ru.raspad.marketspring.services.CartService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/cart")
-@RequiredArgsConstructor
 public class CartController {
+    public CartController(@Autowired CartService service) {
+        this.service = service;
+    }
+    private final CartService service;
 
-   private final CartService service;
-    @PostMapping("/{id}")
-    public void addToCart(@PathVariable Long id){
-        service.addToCart(id);
+    @GetMapping
+    public List<ProductDto> getAllFromCart(){
+        return null;
+    }
+    @PostMapping("/{title}")
+    public void addToCart(@PathVariable String title){
+        service.addToCart(title);
     }
 }

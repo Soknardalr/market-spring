@@ -1,6 +1,5 @@
 package ru.raspad.marketspring.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,6 +21,6 @@ public class ProductDao {
     @Column( name = "price")
     private Integer price;
     @ManyToMany(mappedBy = "products", fetch = FetchType.EAGER)
-    private List<CustomerDao> customers;
+    private List<User> customers;
 
 }

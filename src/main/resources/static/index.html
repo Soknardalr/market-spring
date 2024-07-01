@@ -14,6 +14,7 @@
 <body>
 <div class="container" ng-controller="indexController">
     <h3>Product list</h3>
+    <p><a href="cart.html">Go to Cart</a></p>
     <table class="table table-hover" cellpadding="0" cellspacing="0">
         <tr>
             <td>ID</td>
@@ -32,7 +33,7 @@
             </td>
             <td>
                 <button class="btn btn-danger" ng-click="deleteProduct(p.id)">Delete</button>
-                <button class="btn btn-info" ng-click="addToCart(p.id)">Add to Cart</button>
+                <button class="btn btn-info" ng-click="addToCart(p.title)">Add to Cart</button>
             </td>
         </tbody>
     </table>
