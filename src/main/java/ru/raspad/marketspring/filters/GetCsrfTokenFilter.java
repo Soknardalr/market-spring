@@ -29,6 +29,8 @@ public class GetCsrfTokenFilter extends OncePerRequestFilter {
             response.setStatus(HttpServletResponse.SC_OK);
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
             this.objectMapper.writeValue(response.getWriter(), this.csrfTokenRepository.loadDeferredToken(request, response).get());
+            return;
         }
+        filterChain.doFilter(request, response);
     }
 }

@@ -26,7 +26,7 @@ import ru.raspad.marketspring.utils.TokenCookieJweStringDeserializer;
 import ru.raspad.marketspring.utils.TokenCookieJweStringSerializer;
 
 @Configuration
-@EnableWebSecurity(debug = false)
+//@EnableWebSecurity(debug = false)
 public class SecurityConfig {
 
 
@@ -43,9 +43,10 @@ public class SecurityConfig {
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults())
                 .addFilterAfter(new GetCsrfTokenFilter(), ExceptionTranslationFilter.class)
-                .authorizeHttpRequests(authorizeHttpRequests ->
-                        authorizeHttpRequests.anyRequest().authenticated())
-//                        .requestMatchers("/api/v1/products/**").authenticated()
+                .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry ->
+                        authorizationManagerRequestMatcherRegistry
+                                .requestMatchers("/api/v1/products/**").authenticated()
+                                .anyRequest().permitAll())
                 .sessionManagement((sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                         .sessionAuthenticationStrategy(tokenCookieSessionAuthenticationStrategy)))
@@ -56,7 +57,7 @@ public class SecurityConfig {
 //                .headers(headersCustomizer -> headersCustomizer.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
 //                .exceptionHandling(exceptionCustomizer -> exceptionCustomizer.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
 
-        http.apply(tokenCookieAuthenticationConfigurer);
+        http.with(tokenCookieAuthenticationConfigurer, Customizer.withDefaults());
         return http.build();
     }
 
