@@ -1,4 +1,4 @@
-package ru.raspad.marketspring;
+package ru.raspad.marketspring.utils;
 
 import jakarta.annotation.PostConstruct;
 import org.hibernate.Session;
@@ -7,14 +7,14 @@ import org.hibernate.cfg.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-@Component
-@Scope(value = "singleton")
+//@Component
+//@Scope(value = "singleton")
 public class SessionFactoryUtils {
     private SessionFactory factory;
     @PostConstruct //TODO: CLOSE CONNECTION
     public void init(){
         factory = new Configuration()
-                .configure("static/hibernate.cfg.xml")
+                .configure("old repository/hibernate.cfg.xml")
                 .buildSessionFactory();
     }
 
