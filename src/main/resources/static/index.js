@@ -10,14 +10,19 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
             });
     };
 
-    $scope.loadProductsWithFilter = function () {
-        var minPrice = document.getElementById('min').value
-        var maxPrice = document.getElementById('max').value
-        $http.get(contextPath + '?min_price=' + minPrice + '&max_price=' + maxPrice)
-            .then(function (response) {
-                console.log(response.data)
-                $scope.productList = response.data;
-            });
+    $scope.loadProductsWithFilter = function (pageIndex = 1) {
+        $http({
+            url: contextPath,
+            method: 'GET',
+            params: {
+                title_part: $scope.filter ? $scope.filter.title_part : null,
+                min_price: $scope.filter ? $scope.filter.min_price : null,
+                max_price: $scope.filter ? $scope.filter.max_price : null
+            }
+        }).then(function (response) {
+            console.log(response.data)
+            $scope.productList = response.data;
+        });
     };
 
     $scope.changePrice = function (productId, delta) {
