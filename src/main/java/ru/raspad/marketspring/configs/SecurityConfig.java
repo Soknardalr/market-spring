@@ -39,7 +39,7 @@ public class SecurityConfig {
 
         http
                 .httpBasic(Customizer.withDefaults())
-                .formLogin(Customizer.withDefaults())
+//                .formLogin(Customizer.withDefaults())
                 .addFilterAfter(new GetCsrfTokenFilter(), ExceptionTranslationFilter.class)
                 .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry ->
                         authorizationManagerRequestMatcherRegistry

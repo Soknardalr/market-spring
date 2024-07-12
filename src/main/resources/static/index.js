@@ -1,6 +1,6 @@
-angular.module('app', []).controller('indexController', function ($scope, $http) {
-    const contextPath = 'http://localhost:8189/app/api/v1/products';
-    const cartPath = 'http://localhost:8189/app/api/v1/cart';
+angular.module('app', ['ngStorage']).controller('indexController', function ($scope, $rootScope, $http, $localStorage) {
+    const contextPath = 'https://localhost:8189/app/api/v1/products';
+    const cartPath = 'https://localhost:8189/app/api/v1/cart';
 
     $scope.loadProducts = function () {
         $http.get(contextPath)
@@ -9,6 +9,34 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
                 $scope.productList = response.data;
             });
     };
+
+    /*
+    *
+    * fetch("/csrf", {
+                headers: {
+                    "Authorization": `Basic ${btoa(username + ":" + password)}`
+                }
+    *
+    * */
+
+    $scope.tryToAuth = function () {
+
+        $http.defaults.headers.common.Authorization = `Basic ${btoa($scope.user.username + ":" + $scope.user.password)}`;
+        $http.get('https://localhost:8189/app/csrf')
+            .then(function successCallback(response) {
+                console.log(response)
+                $localStorage.springWebUser = {username: $scope.user.username, token: response.data.token};
+                $localStorage.isAuthenticated = true;
+                $http.defaults.headers.common.Authorization = undefined;
+            }, function errorCallback(response) {
+
+            });
+    };
+
+    $scope.tryToLogout = function () {
+
+    };
+
 
     $scope.loadProductsWithFilter = function (pageIndex = 1) {
         $http({

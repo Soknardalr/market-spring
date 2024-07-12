@@ -5,6 +5,11 @@ server:
   servlet:
     context-path: /app
 
+  ssl:
+    key-store: C:\Program Files (x86)\ssl\keystore.jks
+    key-store-password: password
+    key-alias: selfsigned
+
 jwt:
   cookie-token-key: '{"kty":"oct","k":"956PBFst1FguLr5irJD-aQ"}'
 
