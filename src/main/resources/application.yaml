@@ -2,8 +2,6 @@ server:
   port: 8189
   http2:
     enabled: true
-  servlet:
-    context-path: /app
 
   ssl:
     key-store: C:\Program Files (x86)\ssl\keystore.jks

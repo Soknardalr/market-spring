@@ -48,7 +48,7 @@ public class SecurityConfig {
                 .sessionManagement((sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                         .sessionAuthenticationStrategy(tokenCookieSessionAuthenticationStrategy)))
-                .csrf(csrf -> csrf.csrfTokenRepository(new CookieCsrfTokenRepository())
+                .csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                         .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler())
                         .sessionAuthenticationStrategy((authentication, request, response) -> {})
                 );

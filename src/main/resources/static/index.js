@@ -1,4 +1,5 @@
-angular.module('app', ['ngStorage']).controller('indexController', function ($scope, $rootScope, $http, $localStorage) {
+angular.module('app', ['ngStorage', 'ngCookies'])
+    .controller('indexController', function ($scope, $rootScope, $http, $localStorage, $cookies) {
     const contextPath = 'https://localhost:8189/app/api/v1/products';
     const cartPath = 'https://localhost:8189/app/api/v1/cart';
 
@@ -10,33 +11,34 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
             });
     };
 
-    /*
-    *
-    * fetch("/csrf", {
-                headers: {
-                    "Authorization": `Basic ${btoa(username + ":" + password)}`
-                }
-    *
-    * */
 
     $scope.tryToAuth = function () {
 
         $http.defaults.headers.common.Authorization = `Basic ${btoa($scope.user.username + ":" + $scope.user.password)}`;
-        $http.get('https://localhost:8189/app/csrf')
+        $http.get('https://localhost:8189/csrf')
             .then(function successCallback(response) {
                 console.log(response)
                 $localStorage.springWebUser = {username: $scope.user.username, token: response.data.token};
                 $localStorage.isAuthenticated = true;
                 $http.defaults.headers.common.Authorization = undefined;
+
+                $scope.user.username = '';
+                $scope.user.password = '';
+
             }, function errorCallback(response) {
 
             });
     };
 
     $scope.tryToLogout = function () {
-
+        $localStorage.isAuthenticated = false;
+        console.log($cookies.get("XSRF-TOKEN"));
+        $http.post(`https://localhost:8189/logout?_csrf=${$cookies.get('XSRF-TOKEN')}`);
     };
 
+    $rootScope.isUserLoggedIn = function () {
+        return $localStorage.isAuthenticated;
+    };
 
     $scope.loadProductsWithFilter = function (pageIndex = 1) {
         $http({

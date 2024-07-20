@@ -9,7 +9,7 @@ import ru.raspad.marketspring.services.CartService;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/cart")
+@RequestMapping("/app/api/v1/cart")
 public class CartController {
     public CartController(@Autowired CartService service) {
         this.service = service;

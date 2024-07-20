@@ -43,7 +43,7 @@
             const username = document.querySelector("input#input-username").value;
             const password = document.querySelector("input#input-password").value;
 
-            fetch("/csrf", {
+            fetch("/app/csrf", {
                 headers: {
                     "Authorization": `Basic ${btoa(username + ":" + password)}`
                 }
@@ -58,7 +58,7 @@
         }
 
         document.querySelector("button#get-csrf").onclick = _ => {
-            fetch("/csrf").then(response => {
+            fetch("/app/csrf").then(response => {
                 if (response.status !== 200) {
                     throw new Error(`Unexpected status: ${response.status}`)
                 }
@@ -81,7 +81,7 @@
 
         document.querySelector("button#logout").onclick = _ => {
             const jwt = JSON.parse(document.querySelector("pre#csrf").innerText);
-            fetch(`/logout?${jwt.parameterName}=${jwt.token}`, {
+            fetch(`/app/logout?${jwt.parameterName}=${jwt.token}`, {
                 method: "POST"
             }).then(_ => {
                 document.querySelector("pre#csrf").innerText = '';

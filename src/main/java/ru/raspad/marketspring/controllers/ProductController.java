@@ -7,7 +7,7 @@ import ru.raspad.marketspring.dto.ProductDto;
 import ru.raspad.marketspring.services.ProductService;
 
 @RestController
-@RequestMapping("/api/v1/products")
+@RequestMapping("/app/api/v1/products")
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductService service;
